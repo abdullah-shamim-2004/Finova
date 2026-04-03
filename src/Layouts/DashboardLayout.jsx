@@ -1,10 +1,18 @@
-import React, { Children } from "react";
+import React, { Children, useEffect, useState } from "react";
 import { BsLayoutSidebarInset } from "react-icons/bs";
 import { IoMdHome, IoMdSettings } from "react-icons/io";
-import { MdLogout } from "react-icons/md";
+import { MdDarkMode, MdLogout, MdOutlineLightMode } from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
 
 const DashboardLayout = () => {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  //   set the theme in localstorage
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.querySelector("html").setAttribute("data-theme", theme);
+  }, [theme]);
+
+  // side bar nav links
   const mainNavItems = [
     {
       icon: <IoMdHome size={18} />,
@@ -70,7 +78,7 @@ const DashboardLayout = () => {
 
           {/* Main Nav */}
           <ul className="menu w-full grow px-2 pt-3 pb-0 gap-0.5">
-            <li className="menu-title px-3 py-1 text-xs tracking-widest opacity-40">
+            <li className="menu-title px-3 py-1 text-xs tracking-widest opacity-80">
               MAIN MENU
             </li>
 
@@ -81,7 +89,7 @@ const DashboardLayout = () => {
                   className={({ isActive }) =>
                     `flex items-center gap-4 py-3 px-4 rounded-xl transition-all duration-200 group ${
                       isActive
-                        ? "bg-primary text-primary-content shadow-lg shadow-primary/30"
+                        ? "bg-primary text-primary-content shadow-lg shadow-primary/30 font-semibold"
                         : "hover:bg-base-200 text-base-content/70 hover:text-base-content"
                     }`
                   }
@@ -101,15 +109,38 @@ const DashboardLayout = () => {
 
           {/* Bottom: Settings + Logout + User */}
           <div className="border-t border-base-300 px-2 pt-2 pb-3 space-y-0.5">
+            {/* bottom header */}
+            <li className="menu-title px-3 py-1 text-xs tracking-widest opacity-80">
+              System
+            </li>{" "}
             <button className="flex items-center gap-3 px-3 py-2 rounded-lg w-full text-left hover:bg-base-300 transition-colors text-sm">
+              {/* setting buttton */}
               <IoMdSettings size={18} />
               <span>Settings</span>
             </button>
+            {/* Toggle theme */}
+            {theme === "light" ? (
+              <button
+                onClick={() => setTheme("dark")}
+                className="flex items-center gap-3 px-3 py-2 rounded-lg w-full text-left hover:bg-base-300 transition-colors text-sm"
+              >
+                <MdDarkMode size={18} />
+                <span>Dark Mode</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => setTheme("light")}
+                className="flex items-center gap-3 px-3 py-2 rounded-lg w-full text-left hover:bg-base-300 transition-colors text-sm"
+              >
+                <MdOutlineLightMode size={18} />
+                <span>Light Mode</span>
+              </button>
+            )}
+            {/* Logout button */}
             <button className="flex items-center gap-3 px-3 py-2 rounded-lg w-full text-left hover:bg-base-300 transition-colors text-sm text-error">
               <MdLogout size={18} />
               <span>Logout</span>
             </button>
-
             {/* User Card */}
             <div className="flex items-center gap-3 px-3 py-3 mt-1 rounded-xl bg-base-300">
               <div className="avatar">
