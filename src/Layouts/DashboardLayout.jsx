@@ -1,7 +1,14 @@
 import React, { Children, useEffect, useState } from "react";
 import { BsLayoutSidebarInset } from "react-icons/bs";
-import { IoMdHome, IoMdSettings } from "react-icons/io";
-import { MdDarkMode, MdLogout, MdOutlineLightMode } from "react-icons/md";
+import { CgInsights } from "react-icons/cg";
+import { GrTransaction } from "react-icons/gr";
+import { IoMdSettings } from "react-icons/io";
+import {
+  MdDarkMode,
+  MdDashboard,
+  MdLogout,
+  MdOutlineLightMode,
+} from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
 
 const DashboardLayout = () => {
@@ -15,10 +22,22 @@ const DashboardLayout = () => {
   // side bar nav links
   const mainNavItems = [
     {
-      icon: <IoMdHome size={18} />,
-      label: "Homepage",
-      tip: "Homepage",
+      icon: <MdDashboard size={18} />,
+      label: "Dashboard",
+      tip: "Dashboard",
       link: "/",
+    },
+    {
+      icon: <GrTransaction size={18} />,
+      label: "Transactions",
+      tip: "Transactions",
+      link: "/transactions",
+    },
+    {
+      icon: <CgInsights size={18} />,
+      label: "Insights",
+      tip: "Insights",
+      link: "/insights",
     },
   ];
   return (
@@ -87,10 +106,10 @@ const DashboardLayout = () => {
                 <NavLink
                   to={item.link || "/"}
                   className={({ isActive }) =>
-                    `flex items-center gap-4 py-3 px-4 rounded-xl transition-all duration-200 group ${
+                    `flex items-center gap-4 py-4 px-4 rounded-xl transition-all duration-200 group ${
                       isActive
                         ? "bg-primary text-primary-content shadow-lg shadow-primary/30 font-semibold"
-                        : "hover:bg-base-200 text-base-content/70 hover:text-base-content"
+                        : "hover:bg-base-200 hover:shadow-2xl text-base-content/70 hover:text-base-content"
                     }`
                   }
                   data-tip={item.tip}
