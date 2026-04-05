@@ -1,11 +1,10 @@
 import React from "react";
 import { transactions } from "../../data/mockData";
-import { TfiMoney } from "react-icons/tfi";
-import { BsGraphUpArrow, BsGraphDownArrow } from "react-icons/bs";
-import { AiOutlineWallet } from "react-icons/ai";
 import OverviewCard from "../../Components/Dashboard/OverviewCard";
+import { AiOutlineWallet } from "react-icons/ai";
+import { BsGraphDownArrow, BsGraphUpArrow } from "react-icons/bs";
 
-const DashboardHome = () => {
+const Transactions = () => {
   // total income
   const totalIncome = transactions
     .filter((t) => t.type === "income")
@@ -59,15 +58,14 @@ const DashboardHome = () => {
   ];
 
   return (
-    <section className="p-6 ">
-      {/* Top Grid */}
-      <div className="grid grid-cols-2 mx-auto md:grid-cols-3  gap-8 ">
+    <div className="p-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-10 w-full">
         {dashData.map((item) => (
           <OverviewCard item={item} key={item.id} />
         ))}
-      </div>
-    </section>
+      </div>{" "}
+    </div>
   );
 };
 
-export default DashboardHome;
+export default Transactions;
