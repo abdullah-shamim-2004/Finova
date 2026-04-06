@@ -1,9 +1,17 @@
-import React from "react";
+// import React, { useEffect, useState } from "react";
 
 const Insights = () => {
+  // const [count, setCount] = useState(0);
+
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCount((prv) => prv + 1);
+  //   }, 1000);
+  //   return () => clearInterval(timer);
+  // });
   return (
     <div>
-      <h2>This is Insights</h2>
+      <h2>hi</h2>
     </div>
   );
 };
